@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Мой Веб-Сайт{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center p-5">
+                <h1 class="display-4 mb-4">
+                    <i class="fas fa-rocket text-primary"></i>
+                    Добро пожаловать!
+                </h1>
+                <p class="lead mb-4">
+                    Это простой веб-сайт с системой регистрации и аутентификации пользователей.
+                    Данные сохраняются в SQLite базе данных.
+                </p>
+                
+                {% if session.user_id %}
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-check-circle"></i> Вы вошли в систему!</h5>
+                        <p class="mb-0">Теперь вы можете просматривать свой профиль и использовать все функции сайта.</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{{ url_for('profile') }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-user"></i> Мой Профиль
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-user-plus text-success"></i>
+                                        Регистрация
+                                    </h5>
+                                    <p class="card-text">
+                                        Создайте новый аккаунт, чтобы получить доступ ко всем функциям сайта.
+                                    </p>
+                                    <a href="{{ url_for('register') }}" class="btn btn-success">
+                                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-sign-in-alt text-primary"></i>
+                                        Вход
+                                    </h5>
+                                    <p class="card-text">
+                                        Уже есть аккаунт? Войдите в систему, используя свои данные.
+                                    </p>
+                                    <a href="{{ url_for('login') }}" class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt"></i> Войти
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <div class="mt-5">
+                    <h4>Возможности сайта:</h4>
+                    <div class="row text-start">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-database text-info me-3"></i>
+                                <span>SQLite база данных</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-shield-alt text-warning me-3"></i>
+                                <span>Безопасное хранение паролей</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-mobile-alt text-success me-3"></i>
+                                <span>Адаптивный дизайн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
