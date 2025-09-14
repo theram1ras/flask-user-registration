@@ -96,7 +96,24 @@ def profile():
     user = User.query.get(session['user_id'])
     return render_template('profile.html', user=user)
 
-if __name__ == '__main__':
+# Инициализация базы данных
+def init_db():
+    """Создает все таблицы в базе данных"""
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("✅ База данных инициализирована!")
+            
+            # Проверяем, что таблица user существует
+            inspector = db.inspect(db.engine)
+            tables = inspector.get_table_names()
+            print(f"📋 Найденные таблицы: {tables}")
+            
+        except Exception as e:
+            print(f"❌ Ошибка при инициализации базы данных: {e}")
+
+# Автоматическая инициализация при импорте
+init_db()
+
+if __name__ == '__main__':
     app.run(debug=True)
